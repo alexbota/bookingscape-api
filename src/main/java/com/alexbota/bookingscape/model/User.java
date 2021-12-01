@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayDeque;
+import java.util.Collection;
 
 @Entity
 @Table(
@@ -31,4 +33,11 @@ public class User {
             nullable = false
     )
     private String password;
+    @Column (
+            name = "role",
+            columnDefinition = "TEXT",
+            nullable = false
+    )
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new ArrayDeque<>();
 }
