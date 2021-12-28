@@ -40,4 +40,6 @@ public class User {
     )
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayDeque<>();
+    @OneToMany(fetch = FetchType.EAGER)
+    private Collection<Room> rooms = new ArrayDeque<>();
 }
