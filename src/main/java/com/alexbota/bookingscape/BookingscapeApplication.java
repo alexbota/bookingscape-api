@@ -1,7 +1,9 @@
 package com.alexbota.bookingscape;
 
 import com.alexbota.bookingscape.model.Role;
+import com.alexbota.bookingscape.model.Room;
 import com.alexbota.bookingscape.model.User;
+import com.alexbota.bookingscape.service.RoomService;
 import com.alexbota.bookingscape.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,8 +31,8 @@ public class BookingscapeApplication {
 		return args -> {
 			userService.saveRole(new Role(null, "ROLE_USER"));
 
-			userService.saveUser(new User(null, "john@email.com", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "jack@email.com", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "john@email.com", "1234", new ArrayList<>(), new ArrayList<>()));
+			userService.saveUser(new User(null, "jack@email.com", "1234", new ArrayList<>(), new ArrayList<>()));
 
 			userService.addRoleToUser("john@email.com", "ROLE_USER");
 			userService.addRoleToUser("jack@email.com", "ROLE_USER");

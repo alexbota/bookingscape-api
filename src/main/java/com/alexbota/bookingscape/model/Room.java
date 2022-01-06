@@ -1,11 +1,19 @@
 package com.alexbota.bookingscape.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
 @Table(
         name = "rooms"
 )
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Room {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -74,4 +82,17 @@ public class Room {
             nullable = false
     )
     private String city;
+    @ToString.Exclude
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            optional = false
+    )
+    @JoinColumn(
+            name = "user_id",
+            nullable = false,
+            foreignKey = @ForeignKey(
+                    name = "fk_rooms_users_id"
+            )
+    )
+    private User user;
 }

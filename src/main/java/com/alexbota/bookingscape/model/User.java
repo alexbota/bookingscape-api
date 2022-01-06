@@ -1,12 +1,13 @@
 package com.alexbota.bookingscape.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayDeque;
-import java.util.Collection;
+import java.util.*;
 
 @Entity
 @Table(
@@ -33,13 +34,13 @@ public class User {
             nullable = false
     )
     private String password;
-    @Column (
-            name = "role",
-            columnDefinition = "TEXT",
-            nullable = false
-    )
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayDeque<>();
-    @OneToMany(fetch = FetchType.EAGER)
-    private Collection<Room> rooms = new ArrayDeque<>();
+    @JsonIgnore
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            mappedBy = "user"
+    )
+    private List<Room> rooms = new ArrayList<>();
 }
